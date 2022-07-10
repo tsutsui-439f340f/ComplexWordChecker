@@ -10,7 +10,8 @@
 
 ## 使い方
 まず、このリポジトリを保存します。
-そしてBERTの学習済みデータ(https://github.com/tsutsui6Electronics/ComplexWordChecker/releases/tag/BERT_complex_word_estimator_param_v1)を```ComplexWordChecker/```に保存します。
+そしてBERTの学習済みデータ(https://github.com/tsutsui6Electronics/ComplexWordChecker/releases/tag/BERT_complex_word_estimator_param_v1)
+を```ComplexWordChecker/```に保存します。
 次に予測したい文を記述したテキストファイルを用意します。
 形式は以下になります。
 なお複数行になっていても大丈夫です。
@@ -21,5 +22,9 @@ sample.txt
 
 最後に以下のコマンドを```ComplexWordChecker/```で実行します。
 ```python main.py sample.txt```
+
+## 実行結果例
+
+![image](https://user-images.githubusercontent.com/55880071/178144939-0415e687-8635-46ea-9d0b-2917ae508bfb.png)
 
 
