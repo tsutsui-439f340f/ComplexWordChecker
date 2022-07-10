@@ -10,7 +10,7 @@
 
 ## 使い方
 まず、このリポジトリを保存します。
-そしてBERTの学習済みデータを```ComplexWordChecker/```に保存します。
+そしてBERTの学習済みデータ(https://github.com/tsutsui6Electronics/ComplexWordChecker/releases/tag/BERT_complex_word_estimator_param_v1)を```ComplexWordChecker/```に保存します。
 次に予測したい文を記述したテキストファイルを用意します。
 形式は以下になります。
 なお複数行になっていても大丈夫です。
