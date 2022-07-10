@@ -19,18 +19,18 @@ transformers==4.17.0
 mecab-python3==1.0.3
 ```
 ## 使い方
-まず、このリポジトリを保存します。\
-そしてBERTの学習済みデータ(https://github.com/tsutsui6Electronics/ComplexWordChecker/releases/tag/BERT_complex_word_estimator_param_v1)
+1 まず、このリポジトリを保存します。\
+2 そしてBERTの学習済みデータ(https://github.com/tsutsui6Electronics/ComplexWordChecker/releases/tag/BERT_complex_word_estimator_param_v1)
 を```ComplexWordChecker/```に保存します。\
-次に予測したい文を記述したテキストファイルを用意します。\
-形式は以下になります。\
-なお複数行になっていても大丈夫です。\
+3 次に予測したい文を記述したテキストファイルを用意します。\
+4 形式は以下になります。\
+5 なお複数行になっていても大丈夫です。\
 sample.txt\
 ```
 地下の岩盤には様々な要因により力（ひずみ）がかかっており、急激な変形によってこれを解消する現象が地震である。地球の内部で起こる地質現象（地質活動）の一種。地震に対して、地殻が非常にゆっくりとずれ動く現象を地殻変動と呼ぶ。
 ```
 \
-最後に以下のコマンドを```ComplexWordChecker/```で実行します。\
+6 最後に以下のコマンドを```ComplexWordChecker/```で実行します。\
 ```python main.py sample.txt```
 
 ## 実行結果例
