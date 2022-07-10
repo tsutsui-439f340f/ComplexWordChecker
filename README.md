@@ -10,10 +10,10 @@
 
 ## 動作確認済み環境
 windows10\
-python3.8.8\
+python3.8.8
 
 ```
-#pip list
+#主要なライブラリ
 torch==1.9.0
 transformers==4.17.0
 mecab-python3==1.0.3
