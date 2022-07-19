@@ -33,7 +33,9 @@ sample.txt\
 ```python main.py sample.txt```
 
 ## 実行結果例
-難しいと判断された単語は赤で示されます。
-![image](https://user-images.githubusercontent.com/55880071/178144939-0415e687-8635-46ea-9d0b-2917ae508bfb.png)
+難しいと判断された単語は黄色もしくは水色で示されます。
+水色は辞書中に存在しない難しい単語
+![sample](https://user-images.githubusercontent.com/55880071/179663206-73d4f34d-7a36-4ebf-aec1-a443237b942a.png)
+
 
 
