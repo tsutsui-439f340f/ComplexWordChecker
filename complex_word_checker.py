@@ -1,10 +1,11 @@
+import re
 import torch
 import MeCab
 import unidic,fugashi
 from colorama import Fore
 from transformers import BertJapaneseTokenizer
-import re
 from transformers import BertForSequenceClassification
+
 
 class ComplexWordCheck():
     def __init__(self):
@@ -22,6 +23,7 @@ class ComplexWordCheck():
                 word_info=line.replace("\n","").split("\t")
                 if word_info[0] not in self.complex_dict.keys():
                     self.complex_dict[word_info[0]]=int(word_info[1])
+                    
     def word_extract(self,sentense):
         #形態素解析
         result_sentense=self.tagger.parse(sentense).split("\n")
@@ -40,25 +42,22 @@ class ComplexWordCheck():
             #数値は単語として扱わない
             if re.compile(r'^[0-9]+$').fullmatch(word_info.split("\t")[0]):
                 continue
-
             a=word_info.split("\t")[1].split(",")
             """
             
-            a=['名詞', '普通名詞', '副詞可能', '', '', '', 'キョウ', '今日', '今日',\
+            a：['名詞', '普通名詞', '副詞可能', '', '', '', 'キョウ', '今日', '今日',\
             'キョー', '今日', 'キョー', '和', '""', '""', '""', '""', '""', '""', '体',\
             'キョウ', 'キョウ', 'キョウ', 'キョウ', '"1"', '"C3"', '""', '2509094191768064', '9128']
             
             """
-            #単語の抽出
+            #単語の抽出:
             if a[0] not in ignore:
-                #ひらがなでない場合はすべて抽出
-                if not re.compile(r'^[あ-ん]+$').fullmatch(word_info.split("\t")[0]):
+                if not re.compile(r'^[あ-ん]+$').fullmatch(word_info.split("\t")[0]):     #ひらがなでない場合はすべて抽出
                     if len(a)>6:
                         word_set.add(a[10])
                     else:
                         word_set.add(word_info.split("\t")[0])
-                #ひらがなの場合は非自立可能語であれば抽出
-                else:
+                else:   #ひらがなの場合は非自立可能語であれば抽出
                     if len(a)>6:
                         if a[1]!="非自立可能":
                             word_set.add(a[10])
@@ -69,15 +68,11 @@ class ComplexWordCheck():
         edit_sentences=[]
         for sentence in sentences:
             edit_sentence,words=self.word_extract(sentence)
-
             for word in words:
-                #辞書に存在する単語
-
-                if word in self.complex_dict.keys():
+                if word in self.complex_dict.keys():    #辞書に存在する単語
                     if self.complex_dict[word] > 4:
-                        edit_sentence=edit_sentence.replace(word,Fore.RED+word+Fore.WHITE)
-                #辞書にない単語はBERTで予測する
-                else:
+                        edit_sentence=edit_sentence.replace(word,Fore.LIGHTYELLOW_EX+word+Fore.WHITE)
+                else:   #辞書にない単語はBERTで予測する
                     self.model.to("cpu")
                     encoding = self.tokenizer(
                             word,
@@ -87,6 +82,6 @@ class ComplexWordCheck():
                     pred=self.model(torch.tensor([encoding["input_ids"]]))
                     _, predicted = torch.max(pred[0], 1)
                     if predicted.item() > 4:
-                        edit_sentence=edit_sentence.replace(word,Fore.RED+word+Fore.WHITE)
+                        edit_sentence=edit_sentence.replace(word,Fore.LIGHTCYAN_EX+word+Fore.WHITE)
             edit_sentences.append(edit_sentence.replace(" ",""))
         return edit_sentences
